@@ -308,26 +308,26 @@ export const ReportCard: React.FC<ReportCardProps> = ({ report, compact = false 
             <button
               onClick={() => handleVote('confirm')}
               disabled={!!userExistingVote || hasVotedLocally}
-              className={`flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl font-bold text-xs transition-all active:scale-95 ${
+              className={`flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-3 py-2 min-h-[42px] rounded-xl font-bold text-xs transition-all active:scale-95 touch-manipulation ${
                 userExistingVote?.type === 'confirm'
                   ? 'bg-emerald-500/30 text-emerald-300 border border-emerald-500/50'
                   : 'bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-400 border border-emerald-500/30 disabled:opacity-50'
               }`}
             >
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
               <span>{t('btnYesStillHere')}</span>
             </button>
 
             <button
               onClick={() => handleVote('reject')}
               disabled={!!userExistingVote || hasVotedLocally}
-              className={`flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl font-bold text-xs transition-all active:scale-95 ${
+              className={`flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-3 py-2 min-h-[42px] rounded-xl font-bold text-xs transition-all active:scale-95 touch-manipulation ${
                 userExistingVote?.type === 'reject'
                   ? 'bg-rose-500/30 text-rose-300 border border-rose-500/50'
                   : 'bg-rose-600/20 hover:bg-rose-600/30 text-rose-400 border border-rose-500/30 disabled:opacity-50'
               }`}
             >
-              <XCircle className="w-4 h-4 text-rose-400" />
+              <XCircle className="w-4 h-4 text-rose-400 shrink-0" />
               <span>{t('btnNoLongerHere')}</span>
             </button>
           </div>

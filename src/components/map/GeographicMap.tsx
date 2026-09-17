@@ -190,9 +190,18 @@ export const GeographicMap: React.FC<GeographicMapProps> = ({
       setMapZoom(map.getZoom());
     });
 
+    // Handle container resize (e.g. mobile keyboard, orientation, window resize)
+    const resizeObserver = new ResizeObserver(() => {
+      map.invalidateSize();
+    });
+    if (mapContainerRef.current) {
+      resizeObserver.observe(mapContainerRef.current);
+    }
+
     mapInstanceRef.current = map;
 
     return () => {
+      resizeObserver.disconnect();
       map.remove();
       mapInstanceRef.current = null;
     };
@@ -504,8 +513,8 @@ export const GeographicMap: React.FC<GeographicMapProps> = ({
       {/* Map Container */}
       <div ref={mapContainerRef} className="w-full h-full z-0 outline-none" />
 
-      {/* Floating Floating On-Map Controls (Right Side) */}
-      <div className="absolute right-3.5 top-20 z-10 flex flex-col gap-2 pointer-events-auto">
+      {/* Floating On-Map Controls (Right Side) */}
+      <div className="absolute right-3.5 bottom-24 sm:top-24 sm:bottom-auto z-10 flex flex-col gap-2 pointer-events-auto">
         {/* Zoom In */}
         <button
           onClick={() => mapInstanceRef.current?.zoomIn()}

@@ -330,8 +330,8 @@ export const InteractiveMap: React.FC = () => {
   return (
     <div 
       ref={containerRef}
-      className={`relative w-full bg-[#020617] overflow-hidden select-none flex flex-col touch-none transition-all ${
-        isFullscreen ? 'fixed inset-0 z-50 h-screen' : 'h-[calc(100vh-100px)] min-h-[580px]'
+      className={`relative w-full bg-[#020617] overflow-hidden flex flex-col transition-all ${
+        isFullscreen ? 'fixed inset-0 z-50 h-[100dvh]' : 'h-[calc(100dvh-125px)] min-h-[480px]'
       }`}
     >
       {/* Top Header Floating Search & Line Switcher */}
@@ -343,7 +343,13 @@ export const InteractiveMap: React.FC = () => {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Sök station, bytespunkt eller linje (t.ex. Odenplan, T14, Tvärbanan)..."
+            placeholder={
+              lang === 'es'
+                ? 'Buscar estación o línea (ej. Odenplan, T14, Tvärbanan)...'
+                : lang === 'en'
+                ? 'Search station or line (e.g. Odenplan, T14)...'
+                : 'Sök station eller linje (t.ex. Odenplan, T14, Tvärbanan)...'
+            }
             className="w-full bg-transparent text-xs text-slate-100 placeholder-slate-400 outline-none font-medium py-1"
           />
           {searchQuery && (
@@ -733,7 +739,7 @@ export const InteractiveMap: React.FC = () => {
 
       {/* Interactive Full-Bleed Map Canvas */}
       <div
-        className={`w-full h-full ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
+        className={`w-full h-full select-none touch-none ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}

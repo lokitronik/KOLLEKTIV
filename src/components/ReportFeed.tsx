@@ -95,7 +95,7 @@ export const ReportFeed: React.FC = () => {
 
           <button
             onClick={() => setIsReportModalOpen(true)}
-            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-sm transition-all"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-sm transition-all touch-manipulation active:scale-95 shrink-0"
           >
             <span>{lang === 'es' ? '+ Reportar' : '+ Rapportera'}</span>
           </button>
