@@ -22,7 +22,6 @@ export const ProfileView: React.FC = () => {
     currentUser, 
     setCurrentUser, 
     reports, 
-    switchUserRole,
     lang, 
     setLang, 
     t,
@@ -111,20 +110,6 @@ export const ProfileView: React.FC = () => {
                 {currentUser.email || 'Anonym pendlare'} · Medlem sedan jan 2025
               </p>
             </div>
-          </div>
-
-          {/* Quick Role Switcher Button */}
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => switchUserRole(currentUser.role === 'admin' ? 'user' : 'admin')}
-              className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-all ${
-                currentUser.role === 'admin'
-                  ? 'bg-purple-900/60 border-purple-500 text-purple-200'
-                  : 'bg-slate-800 border-slate-700 text-slate-300 hover:text-white'
-              }`}
-            >
-              {currentUser.role === 'admin' ? 'Växla till Resenär' : 'Växla till Admin / Moderator'}
-            </button>
           </div>
         </div>
 

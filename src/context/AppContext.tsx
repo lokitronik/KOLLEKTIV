@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { INITIAL_CATEGORIES } from '../data/categories';
-import { INITIAL_DEMO_REPORTS, getFreshDemoReports } from '../data/demoReports';
 import { STATIONS, TRANSIT_LINES, TRANSIT_HIERARCHY } from '../data/transitNetwork';
 import { Language, TRANSLATIONS } from '../i18n/translations';
 import { CategoryDefinition, Report, Station, TransitLine, User } from '../types';
@@ -15,7 +14,6 @@ interface AppContextType {
   // User & Auth
   currentUser: User;
   setCurrentUser: React.Dispatch<React.SetStateAction<User>>;
-  switchUserRole: (role: 'user' | 'moderator' | 'admin') => void;
   
   // Data
   reports: Report[];
@@ -31,8 +29,8 @@ interface AppContextType {
   setActiveCity: (city: string) => void;
   
   // Active Tab / View
-  activeTab: 'map' | 'feed' | 'favorites' | 'stats' | 'profile' | 'admin';
-  setActiveTab: (tab: 'map' | 'feed' | 'favorites' | 'stats' | 'profile' | 'admin') => void;
+  activeTab: 'map' | 'feed' | 'favorites' | 'stats' | 'profile';
+  setActiveTab: (tab: 'map' | 'feed' | 'favorites' | 'stats' | 'profile') => void;
   
   // Modals
   isReportModalOpen: boolean;
@@ -57,7 +55,7 @@ interface AppContextType {
   updateReportStatus: (reportId: string, status: Report['status']) => Promise<void>;
   deleteReport: (reportId: string) => Promise<void>;
   
-  // Category Actions (Admin)
+  // Category Actions
   saveCategory: (category: CategoryDefinition) => Promise<void>;
   
   // Favorites Management
@@ -66,12 +64,10 @@ interface AppContextType {
   isStationFavorite: (stationId: string) => boolean;
   isLineFavorite: (lineId: string) => boolean;
 
-  // Standalone / GitHub Pages Utilities
+  // Standalone / Storage Utilities
   clearAllReports: () => void;
-  resetDemoReports: () => void;
   importReports: (newReports: Report[]) => void;
   exportDatabase: () => void;
-  simulateIncident: () => void;
 }
 
 const DEFAULT_USER: User = {
@@ -200,7 +196,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [isConnected, setIsConnected] = useState(true);
   const [isStandaloneMode, setIsStandaloneMode] = useState(false);
   
-  const [activeTab, setActiveTab] = useState<'map' | 'feed' | 'favorites' | 'stats' | 'profile' | 'admin'>('map');
+  const [activeTab, setActiveTab] = useState<'map' | 'feed' | 'favorites' | 'stats' | 'profile'>('map');
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
   const [preselectedStationId, setPreselectedStationId] = useState<string | null>(null);
   const [isLegalModalOpen, setIsLegalModalOpen] = useState(false);
@@ -275,17 +271,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   // Helper translation lookup
   const t = (key: keyof typeof TRANSLATIONS.sv): string => {
     return TRANSLATIONS[lang]?.[key] || TRANSLATIONS.sv[key] || String(key);
-  };
-
-  // Switch role helper
-  const switchUserRole = (role: 'user' | 'moderator' | 'admin') => {
-    setCurrentUser((prev) => ({
-      ...prev,
-      role,
-      username: role === 'admin' ? 'SL-Admin (Moderator)' : 'SthlmResenär',
-      reputation: role === 'admin' ? 500 : 85,
-      reputationTitle: role === 'admin' ? 'Systemadministratör' : getReputationTier(85)
-    }));
   };
 
   // Connect to SSE stream for real-time live events
@@ -673,7 +658,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }
   };
 
-  // Standalone / GitHub Pages Utilities
+  // Standalone / Storage Utilities
   const clearAllReports = () => {
     setReports([]);
     try {
@@ -684,17 +669,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       title: '🧹 Databas rensad',
       body: 'Alla rapporter har rensats. Redo för skarp drift.',
       type: 'success'
-    });
-  };
-
-  const resetDemoReports = () => {
-    const fresh = getFreshDemoReports();
-    setReports(fresh);
-    broadcastSync('SET_REPORTS', fresh);
-    setToastMessage({
-      title: '🔄 Demodata återställd',
-      body: 'Färska exempelincidenter för Stockholms kollektivtrafik har laddats in.',
-      type: 'info'
     });
   };
 
@@ -732,57 +706,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     });
   };
 
-  const simulateIncident = () => {
-    const randomStation = stations[Math.floor(Math.random() * stations.length)];
-    const primaryLineId = randomStation.lineIds[0] || 'tb_green_17';
-    const foundLine = lines.find((l) => l.id === primaryLineId);
-    const transportType = randomStation.transportTypes[0] || 'tunnelbana';
-
-    const simRep: Report = {
-      id: `rep_sim_${Date.now()}`,
-      userId: 'usr_community_sim',
-      username: 'Pendlare_Sthlm',
-      userReputation: 90,
-      category: 'drift',
-      subcategoryId: 'forsening',
-      subcategoryName: 'Försening / Inställd avgång',
-      severity: 'medium',
-      location: {
-        transportType,
-        operator: 'SL',
-        city: 'Stockholm',
-        country: 'Sverige',
-        lineId: primaryLineId,
-        lineName: foundLine?.name || 'Grön linje',
-        lineColor: foundLine?.color || '#10B981',
-        locationType: 'station',
-        stationId: randomStation.id,
-        stationName: randomStation.name,
-        stationArea: 'perrong'
-      },
-      comment: `Simulerad händelse: Försening ca 10 min pga växelfel vid ${randomStation.name}.`,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      expiresAt: new Date(Date.now() + 60 * 60 * 1000).toISOString(),
-      status: 'aktiv',
-      confidence: 'ej_verifierad',
-      confidenceScore: 45,
-      confirmationsCount: 1,
-      rejectionsCount: 0,
-      confirmations: [],
-      flags: [],
-      flaggedCount: 0,
-      isDemo: true
-    };
-    setReports((prev) => [simRep, ...prev]);
-    broadcastSync('NEW_REPORT', simRep);
-    setToastMessage({
-      title: `⚡ Ny händelse vid ${randomStation.name}`,
-      body: simRep.comment || '',
-      type: 'alert'
-    });
-  };
-
   // Favorites
   const toggleFavoriteStation = (stationId: string) => {
     setCurrentUser((prev) => {
@@ -815,7 +738,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         t,
         currentUser,
         setCurrentUser,
-        switchUserRole,
         reports,
         categories,
         stations,
@@ -850,10 +772,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         isStationFavorite,
         isLineFavorite,
         clearAllReports,
-        resetDemoReports,
         importReports,
-        exportDatabase,
-        simulateIncident
+        exportDatabase
       }}
     >
       {children}

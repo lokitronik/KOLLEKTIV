@@ -3,7 +3,6 @@ import fs from 'fs';
 import path from 'path';
 import { createServer as createViteServer } from 'vite';
 import { INITIAL_CATEGORIES } from './src/data/categories';
-import { INITIAL_DEMO_REPORTS } from './src/data/demoReports';
 import { STATIONS, TRANSIT_LINES, TRANSIT_HIERARCHY } from './src/data/transitNetwork';
 import { CategoryDefinition, Report, StationStats } from './src/types';
 import { calculateConfidence } from './src/utils/confidence';
@@ -335,24 +334,6 @@ async function startServer() {
     saveDataToDisk();
     broadcastEvent('report_deleted', { id });
     res.json({ message: 'Report deleted', deleted });
-  });
-
-  // Clear all reports / clean slate (Admin)
-  app.post('/api/admin/clear-all', (req: Request, res: Response) => {
-    reports = [];
-    saveDataToDisk();
-    broadcastEvent('reports_updated', reports);
-    res.json({ message: 'All reports cleared', count: 0 });
-  });
-
-  // Reset defaults (Admin)
-  app.post('/api/admin/reset-defaults', (req: Request, res: Response) => {
-    reports = INITIAL_DEMO_REPORTS.map((r) => ({ ...r, isDemo: false }));
-    categories = [...INITIAL_CATEGORIES];
-    saveDataToDisk();
-    broadcastEvent('reports_updated', reports);
-    broadcastEvent('categories_updated', categories);
-    res.json({ message: 'Reset to default state', reportCount: reports.length });
   });
 
   // Get categories

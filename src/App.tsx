@@ -7,14 +7,13 @@ import { ReportFeed } from './components/ReportFeed';
 import { FavoritesView } from './components/FavoritesView';
 import { StatisticsView } from './components/StatisticsView';
 import { ProfileView } from './components/ProfileView';
-import { AdminDashboard } from './components/AdminDashboard';
 import { ReportModal } from './components/ReportModal';
 import { LegalModal } from './components/LegalModal';
 import { BottomNav } from './components/BottomNav';
 import { Toast } from './components/Toast';
 
 const MainAppContent: React.FC = () => {
-  const { activeTab, currentUser } = useApp();
+  const { activeTab } = useApp();
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-emerald-500/30 selection:text-emerald-300 font-sans">
@@ -31,7 +30,6 @@ const MainAppContent: React.FC = () => {
         {activeTab === 'favorites' && <FavoritesView />}
         {activeTab === 'stats' && <StatisticsView />}
         {activeTab === 'profile' && <ProfileView />}
-        {activeTab === 'admin' && currentUser.role === 'admin' && <AdminDashboard />}
       </main>
 
       {/* Floating Report Wizard Modal */}

@@ -5,8 +5,7 @@ import {
   Star, 
   BarChart3, 
   User, 
-  PlusCircle, 
-  ShieldAlert 
+  PlusCircle
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 
@@ -17,7 +16,6 @@ export const BottomNav: React.FC = () => {
     setIsReportModalOpen, 
     setPreselectedStationId,
     t,
-    currentUser,
     reports
   } = useApp();
 
@@ -106,24 +104,18 @@ export const BottomNav: React.FC = () => {
           <span className="text-[11px]">{t('navStats')}</span>
         </button>
 
-        {/* Profil / Admin */}
+        {/* Profil */}
         <button
           id="nav-profile-button"
-          onClick={() => setActiveTab(currentUser.role === 'admin' ? 'admin' : 'profile')}
+          onClick={() => setActiveTab('profile')}
           className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-all ${
-            activeTab === 'profile' || activeTab === 'admin'
+            activeTab === 'profile'
               ? 'text-emerald-400 font-bold'
               : 'text-slate-400 hover:text-slate-200'
           }`}
         >
-          {currentUser.role === 'admin' ? (
-            <ShieldAlert className="w-5 h-5 mb-0.5 text-purple-400" />
-          ) : (
-            <User className="w-5 h-5 mb-0.5" />
-          )}
-          <span className="text-[11px]">
-            {currentUser.role === 'admin' ? t('navAdmin') : t('navProfile')}
-          </span>
+          <User className="w-5 h-5 mb-0.5" />
+          <span className="text-[11px]">{t('navProfile')}</span>
         </button>
       </div>
     </nav>

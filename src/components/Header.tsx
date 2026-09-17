@@ -2,12 +2,9 @@ import React from 'react';
 import { 
   Radio, 
   Globe, 
-  ShieldAlert, 
-  Bell, 
   MapPin, 
   UserCheck, 
   ChevronDown,
-  Sparkles,
   PlusCircle
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
@@ -19,9 +16,7 @@ export const Header: React.FC = () => {
     isConnected, 
     reports, 
     currentUser, 
-    switchUserRole,
     setActiveTab,
-    activeTab,
     setIsReportModalOpen,
     setPreselectedStationId
   } = useApp();
@@ -113,43 +108,22 @@ export const Header: React.FC = () => {
               setIsReportModalOpen(true);
             }}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-sm active:scale-95 transition-all"
-            title="Skapa ny rapport"
+            title={lang === 'es' ? 'Crear nueva alerta' : 'Skapa ny rapport'}
           >
             <PlusCircle className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Rapportera</span>
+            <span>{lang === 'es' ? 'Crear Alerta' : lang === 'en' ? 'New Alert' : 'Rapportera'}</span>
           </button>
 
-          {/* Quick Role Toggle (Demo / Admin) */}
+          {/* User Profile Badge (Go to Profile View) */}
           <button
-            id="role-switch-button"
-            onClick={() => {
-              if (currentUser.role === 'admin') {
-                switchUserRole('user');
-              } else {
-                switchUserRole('admin');
-                setActiveTab('admin');
-              }
-            }}
-            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs font-semibold transition-all ${
-              currentUser.role === 'admin'
-                ? 'bg-purple-900/60 border-purple-500/50 text-purple-200'
-                : 'bg-slate-800 hover:bg-slate-700 border-slate-700 text-slate-300'
-            }`}
-            title="Toggle Admin / User mode"
+            id="header-profile-button"
+            onClick={() => setActiveTab('profile')}
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-semibold text-slate-300 hover:text-white transition-all"
+            title={lang === 'es' ? 'Mi perfil y configuración' : 'Min profil & inställningar'}
           >
-            {currentUser.role === 'admin' ? (
-              <>
-                <ShieldAlert className="w-3.5 h-3.5 text-purple-400" />
-                <span className="hidden sm:inline">Admin-läge</span>
-                <span className="sm:hidden">Admin</span>
-              </>
-            ) : (
-              <>
-                <UserCheck className="w-3.5 h-3.5 text-emerald-400" />
-                <span className="hidden sm:inline">{currentUser.username}</span>
-                <span className="text-emerald-400 text-[11px]">★ {currentUser.reputation}</span>
-              </>
-            )}
+            <UserCheck className="w-3.5 h-3.5 text-emerald-400" />
+            <span className="hidden sm:inline">{currentUser.username}</span>
+            <span className="text-emerald-400 text-[11px]">★ {currentUser.reputation}</span>
           </button>
         </div>
       </div>

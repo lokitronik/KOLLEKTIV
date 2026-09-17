@@ -173,7 +173,7 @@ export const ReportCard: React.FC<ReportCardProps> = ({ report, compact = false 
                   <span>Falsk information</span>
                 </button>
 
-                {currentUser.role === 'admin' && (
+                {report.userId === currentUser.id && (
                   <div className="mt-1 pt-1 border-t border-slate-700">
                     <button
                       onClick={() => {
@@ -183,7 +183,11 @@ export const ReportCard: React.FC<ReportCardProps> = ({ report, compact = false 
                       className="w-full text-left px-3 py-1.5 hover:bg-slate-700 text-emerald-400 flex items-center gap-2 font-semibold"
                     >
                       <Check className="w-3.5 h-3.5" />
-                      <span>Växla Löst / Aktiv</span>
+                      <span>
+                        {report.status === 'aktiv' 
+                          ? (lang === 'es' ? 'Marcar como resuelto' : 'Markera som löst') 
+                          : (lang === 'es' ? 'Reactivar alerta' : 'Återaktivera')}
+                      </span>
                     </button>
                     <button
                       onClick={() => {
@@ -193,7 +197,7 @@ export const ReportCard: React.FC<ReportCardProps> = ({ report, compact = false 
                       className="w-full text-left px-3 py-1.5 hover:bg-slate-700 text-rose-400 flex items-center gap-2 font-semibold"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
-                      <span>Radera rapport</span>
+                      <span>{lang === 'es' ? 'Eliminar mi alerta' : 'Radera min rapport'}</span>
                     </button>
                   </div>
                 )}
