@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="refresh" content="0; url=./" />
+    <title>KollektivAlert Stockholm - Omdirigerar...</title>
+    <script>
+      // SPA redirect fallback for GitHub Pages
+      const l = window.location;
+      if (l.search[1] !== '/') {
+        l.replace(l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + l.pathname.substring(0, l.pathname.lastIndexOf('/') + 1));
+      }
+    </script>
+  </head>
+  <body style="background-color: #020617; color: #94a3b8; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0;">
+    <p>Omdirigerar till KollektivAlert...</p>
+  </body>
+</html>

@@ -1,0 +1,270 @@
+{
+  "reports": [],
+  "categories": [
+    {
+      "id": "sakerhet",
+      "name": {
+        "sv": "Säkerhet & Trygghet",
+        "en": "Safety & Security",
+        "es": "Seguridad y Protección"
+      },
+      "icon": "AlertTriangle",
+      "color": "#EF4444",
+      "bgColor": "#FEF2F2",
+      "borderColor": "#FCA5A5",
+      "defaultExpiryMinutes": 45,
+      "subcategories": [
+        {
+          "id": "brak_konflikt",
+          "name": { "sv": "Bråk / Fysisk konflikt", "en": "Fight / Altercation", "es": "Pelea / Altercado" },
+          "severity": "high",
+          "defaultExpiryMinutes": 30
+        },
+        {
+          "id": "personskada",
+          "name": { "sv": "Personskada / Sjukdomsfall", "en": "Injured Person / Medical", "es": "Persona herida / Caso médico" },
+          "severity": "critical",
+          "defaultExpiryMinutes": 45
+        },
+        {
+          "id": "nodlage",
+          "name": { "sv": "Nödläge / Utrymning", "en": "Emergency / Evacuation", "es": "Emergencia / Evacuación" },
+          "severity": "critical",
+          "defaultExpiryMinutes": 60
+        },
+        {
+          "id": "polis",
+          "name": { "sv": "Polisinsats / Avspärrning", "en": "Police Operation / Cordon", "es": "Operativo policial / Cordón" },
+          "severity": "medium",
+          "defaultExpiryMinutes": 45
+        },
+        {
+          "id": "ambulans",
+          "name": { "sv": "Ambulans / Räddningstjänst", "en": "Ambulance / Rescue Services", "es": "Ambulancia / Servicios de rescate" },
+          "severity": "high",
+          "defaultExpiryMinutes": 45
+        },
+        {
+          "id": "farligt_beteende",
+          "name": { "sv": "Otrygg stämning / Farligt beteende", "en": "Hazardous / Unsafe Behavior", "es": "Comportamiento peligroso" },
+          "severity": "medium",
+          "defaultExpiryMinutes": 40
+        }
+      ]
+    },
+    {
+      "id": "drift",
+      "name": {
+        "sv": "Drift & Trafik",
+        "en": "Operations & Traffic",
+        "es": "Operaciones y Tráfico"
+      },
+      "icon": "Construction",
+      "color": "#F59E0B",
+      "bgColor": "#FFFBEB",
+      "borderColor": "#FCD34D",
+      "defaultExpiryMinutes": 120,
+      "subcategories": [
+        {
+          "id": "forsening",
+          "name": { "sv": "Kraftig försening (>15 min)", "en": "Major Delay (>15 min)", "es": "Retraso grave (>15 min)" },
+          "severity": "medium",
+          "defaultExpiryMinutes": 90
+        },
+        {
+          "id": "stilla_tag",
+          "name": { "sv": "Stilla tåg på spår", "en": "Train Stopped on Track", "es": "Tren parado en vía" },
+          "severity": "high",
+          "defaultExpiryMinutes": 60
+        },
+        {
+          "id": "installd_avgång",
+          "name": { "sv": "Inställd avgång / Ersättningsbuss", "en": "Cancelled Departure / Bus", "es": "Salida / Autobús cancelado" },
+          "severity": "medium",
+          "defaultExpiryMinutes": 90
+        },
+        {
+          "id": "stangd_station",
+          "name": { "sv": "Stängd station / Tågen passerar", "en": "Station Closed", "es": "Estación cerrada / Tren no para" },
+          "severity": "critical",
+          "defaultExpiryMinutes": 240
+        },
+        {
+          "id": "stangd_uppgang",
+          "name": { "sv": "Stängd uppgång / Entré", "en": "Closed Entrance / Exit", "es": "Entrada / Salida cerrada" },
+          "severity": "medium",
+          "defaultExpiryMinutes": 180
+        },
+        {
+          "id": "rulltrappa_ur_funktion",
+          "name": { "sv": "Rulltrappa ur funktion / Avstängd", "en": "Escalator Out of Order", "es": "Escalera mecánica averiada" },
+          "severity": "low",
+          "defaultExpiryMinutes": 360
+        },
+        {
+          "id": "hiss_ur_funktion",
+          "name": { "sv": "Hiss ur funktion (tillgänglighet)", "en": "Elevator Out of Order", "es": "Ascensor fuera de servicio" },
+          "severity": "medium",
+          "defaultExpiryMinutes": 360
+        },
+        {
+          "id": "sparrproblem",
+          "name": { "sv": "Spärrar ur funktion / Biljettköer", "en": "Ticket Barrier Glitch / Queues", "es": "Problemas en torniquetes / barreras" },
+          "severity": "low",
+          "defaultExpiryMinutes": 120
+        }
+      ]
+    },
+    {
+      "id": "fordon",
+      "name": {
+        "sv": "Fordon & Vagnar",
+        "en": "Vehicle Issues",
+        "es": "Vehículo y Vagones"
+      },
+      "icon": "TrainTrack",
+      "color": "#3B82F6",
+      "bgColor": "#EFF6FF",
+      "borderColor": "#93C5FD",
+      "defaultExpiryMinutes": 60,
+      "subcategories": [
+        {
+          "id": "problem_i_tag",
+          "name": { "sv": "Tekniskt fel i tåget / Dörrfel", "en": "Issue Inside Train / Door Glitch", "es": "Fallo en el tren / Puerta averiada" },
+          "severity": "medium",
+          "defaultExpiryMinutes": 45
+        },
+        {
+          "id": "problem_i_buss",
+          "name": { "sv": "Problem i bussen / AC ur funktion", "en": "Issue Inside Bus / AC Fault", "es": "Problema en el autobús / Clima" },
+          "severity": "medium",
+          "defaultExpiryMinutes": 45
+        },
+        {
+          "id": "fordon_stoppat",
+          "name": { "sv": "Fordon stillastående mellan stationer", "en": "Vehicle Halted Between Stations", "es": "Vehículo detenido entre estaciones" },
+          "severity": "high",
+          "defaultExpiryMinutes": 30
+        },
+        {
+          "id": "extrem_trangsel",
+          "name": { "sv": "Extrem trängsel / Fullpackat fordon", "en": "Extreme Overcrowding", "es": "Vehículo excesivamente abarrotado" },
+          "severity": "low",
+          "defaultExpiryMinutes": 45
+        }
+      ]
+    },
+    {
+      "id": "station",
+      "name": {
+        "sv": "Station & Faciliteter",
+        "en": "Station & Facilities",
+        "es": "Estación e Instalaciones"
+      },
+      "icon": "Building2",
+      "color": "#8B5CF6",
+      "bgColor": "#F5F3FF",
+      "borderColor": "#C4B5FD",
+      "defaultExpiryMinutes": 120,
+      "subcategories": [
+        {
+          "id": "biljetthall_ko",
+          "name": { "sv": "Extrem kö i biljetthall / Spärrlinje", "en": "Extreme Queues in Ticket Hall", "es": "Colas masivas en vestíbulo" },
+          "severity": "low",
+          "defaultExpiryMinutes": 60
+        },
+        {
+          "id": "perrong_trangsel",
+          "name": { "sv": "Farlig trängsel på perrong", "en": "Dangerous Crowding on Platform", "es": "Aglomeración en el andén" },
+          "severity": "medium",
+          "defaultExpiryMinutes": 45
+        },
+        {
+          "id": "smuts_nedskrapning",
+          "name": { "sv": "Spill / Sanering / Nedskräpning", "en": "Spill / Cleaning Needed", "es": "Limpieza urgente / Vertido" },
+          "severity": "low",
+          "defaultExpiryMinutes": 120
+        },
+        {
+          "id": "fel_pa_skyltar",
+          "name": { "sv": "Informationsskyltar ur funktion", "en": "Display Screens Offline", "es": "Pantallas informativas apagadas" },
+          "severity": "low",
+          "defaultExpiryMinutes": 180
+        }
+      ]
+    },
+    {
+      "id": "aktivitet",
+      "name": {
+        "sv": "Aktivitet & Kontroller",
+        "en": "Activity & Inspections",
+        "es": "Actividad y Controles"
+      },
+      "icon": "Users",
+      "color": "#10B981",
+      "bgColor": "#ECFDF5",
+      "borderColor": "#6EE7B7",
+      "defaultExpiryMinutes": 45,
+      "subcategories": [
+        {
+          "id": "biljettkontroll",
+          "name": { "sv": "Biljettkontroll vid spärrar", "en": "Ticket Inspection at Barriers", "es": "Control de billetes en torniquetes" },
+          "severity": "low",
+          "defaultExpiryMinutes": 45
+        },
+        {
+          "id": "biljettkontroll_ombord",
+          "name": { "sv": "Biljettkontroll ombord på tåg/buss", "en": "Ticket Inspection Onboard", "es": "Control de billetes a bordo" },
+          "severity": "low",
+          "defaultExpiryMinutes": 45
+        },
+        {
+          "id": "trygghetsvardar",
+          "name": { "sv": "Trygghetsvärdar / Ordningsvakter på plats", "en": "Safety Hosts / Security on Site", "es": "Personal de seguridad / Auxiliares presentes" },
+          "severity": "low",
+          "defaultExpiryMinutes": 60
+        },
+        {
+          "id": "evenemangsfolkmassa",
+          "name": { "sv": "Evenemangsfölje / Match / Konsert", "en": "Event Crowd / Concert / Sports", "es": "Afluencia por evento / Concierto / Partido" },
+          "severity": "low",
+          "defaultExpiryMinutes": 120
+        }
+      ]
+    },
+    {
+      "id": "annat",
+      "name": {
+        "sv": "Övrigt & Väder",
+        "en": "Other & Weather",
+        "es": "Otros y Clima"
+      },
+      "icon": "HelpCircle",
+      "color": "#6B7280",
+      "bgColor": "#F9FAFB",
+      "borderColor": "#D1D5DB",
+      "defaultExpiryMinutes": 60,
+      "subcategories": [
+        {
+          "id": "vaderpaverkan",
+          "name": { "sv": "Väderpåverkan (Halka, Snö, Regn)", "en": "Weather (Ice, Snow, Water)", "es": "Afección climática (hielo, nieve, agua)" },
+          "severity": "medium",
+          "defaultExpiryMinutes": 120
+        },
+        {
+          "id": "hittegods",
+          "name": { "sv": "Upphittat / Borttappat föremål", "en": "Lost & Found Item", "es": "Objeto perdido / encontrado" },
+          "severity": "low",
+          "defaultExpiryMinutes": 180
+        },
+        {
+          "id": "ovrigt",
+          "name": { "sv": "Övrig observation", "en": "Other Observation", "es": "Otra observación" },
+          "severity": "low",
+          "defaultExpiryMinutes": 60
+        }
+      ]
+    }
+  ],
+  "lastUpdated": "2026-08-27T04:55:00.000Z"
+}

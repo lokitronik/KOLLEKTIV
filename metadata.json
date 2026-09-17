@@ -1,0 +1,8 @@
+{
+  "name": "KollektivAlert Stockholm",
+  "description": "Realtidsinformation och samhällsrapporter om incidenter, driftstörningar och händelser i kollektivtrafiken.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
